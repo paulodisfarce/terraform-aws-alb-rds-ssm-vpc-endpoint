@@ -1,0 +1,13 @@
+variable "SecurityGroup_alb" {}
+variable "vpc_id" {}
+variable "subnet_public" {}
+variable "port" {}
+variable "protocol" {}
+variable "type" {}
+variable "enable_deletion_protection" {}
+variable "internal" {}
+variable "load_balancer_type" {}
+variable "name_alb" {}
+variable "matcher" {}
+variable "path" {}
+variable "template_launcher" {}

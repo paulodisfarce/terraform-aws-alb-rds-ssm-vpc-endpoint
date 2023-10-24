@@ -1,0 +1,12 @@
+variable "allocated_storage" {}
+variable "storage_type" {}
+variable "engine" {}
+variable "engine_version" {}
+variable "instance_class" {}
+variable "name" {}
+variable "username" {}
+variable "password" {}
+variable "parameter_group_name" {}
+variable "skip_final_snapshot" {}
+variable "SecurityGroup_rds" {}
+variable "subnet_db_group" {}
