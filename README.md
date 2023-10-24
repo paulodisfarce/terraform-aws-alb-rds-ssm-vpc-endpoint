@@ -8,6 +8,5 @@ Utilizo 3 subnets:
 
 No module network separei o security group pra ficar mais organizado, e usei locals para criar as regras de forma mais dinamica.
 
-Nessa infra utilizo um Session Manager para fazer conexão remota direto pela AWS, assim evitando usar a porta 22/SSH, após passar uma 'limpa' pretendo também adicionar o VPC Endpoint. 
-Meu foco é criar um ppequeno artigo ensinando a conectar nas maquinas privadas usando SSM e VPC Endpoint, coisa simples mas bem feita. 
-
+Nessa infra utilizo um Session Manager, utilizo a role entre SSM e EC2 e faço atachamento na EC2, assim evitando usar a porta 22/SSH, ou ip publicos, Bastion, etc. Após passar uma 'limpa' pretendo também adicionar o VPC Endpoint. 
+Meu foco é criar um ppequeno artigo ensinando a conectar nas maquinas privadas usando SSM e VPC Endpoint, coisa simples mas bem feita.
