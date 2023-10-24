@@ -1,16 +1,7 @@
-
-output "host-rds" {
-  value = aws_db_instance.mysql_instance.address
-}
-
-output "username-rds" {
+output "db_username_rds" {
   value = aws_db_instance.mysql_instance.username
 }
 
-output "domain-rds" {
-  value = aws_db_instance.mysql_instance.domain
-}
-
-output "db-rds" {
-  value = aws_db_instance.mysql_instance.db_name
+output "db_instance_endpoint" {
+  value = aws_db_instance.mysql_instance.endpoint
 }

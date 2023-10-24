@@ -85,8 +85,8 @@ resource "aws_security_group" "sg-asg" {
 //SG for DB
 resource "aws_security_group" "sg-db" {
   vpc_id      = aws_vpc.main.id
-  name        = "SecGroupDB"
-  description = "Security Group for Database"
+  name        = var.name_sg_db
+  description = var.description_sg_db
   dynamic "ingress" {
     for_each = local.inbound_rules_db
     content {
