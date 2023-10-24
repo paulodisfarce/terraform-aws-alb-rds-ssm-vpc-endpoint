@@ -10,7 +10,7 @@ locals {
     { port = 443, description = "port 80", protocol = "tcp", cidr_blocks = ["0.0.0.0/0"] },
     { port = 80, description = "port HTTP", protocol = "tcp", cidr_blocks = flatten([aws_subnet.public.*.cidr_block]) },
     { port = 3306, description = "port MYSQL", protocol = "tcp", cidr_blocks = flatten([aws_subnet.private_db_subnet.*.cidr_block]) },
-    #{ port = 22, description = "port for SSH", protocol = "tcp", cidr_blocks = ["0.0.0.0/0"] } #179.108.28.17/32
+    #{ port = 22, description = "port for SSH", protocol = "tcp", cidr_blocks = ["0.0.0.0/0"] }
   ]
   outbound_rules_app = [
     { port = 80, description = "port 80", protocol = "tcp", cidr_blocks = ["0.0.0.0/0"] },
@@ -23,12 +23,6 @@ locals {
   ]
 }
 
-
-#resource "aws_ec2_instance_connect_endpoint" "example" {
-# subnet_id          = flatten(aws_subnet.private.*.id)[0]
-#security_group_ids = [aws_security_group.sg-asg.id]
-# preserve_client_ip = false
-#}
 
 //SG for ALB
 resource "aws_security_group" "sg-alb" {

@@ -1,4 +1,4 @@
-// Role EC2
+//Role EC2
 resource "aws_iam_role" "ec2_role" {
   name = var.name
 
