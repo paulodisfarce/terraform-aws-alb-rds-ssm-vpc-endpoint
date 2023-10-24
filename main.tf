@@ -1,13 +1,6 @@
-data "http" "myip" {
-  url = "http://ipv4.icanhazip.com"
-}
-
-
-
 module "aws-network" {
   source = "./aws-network"
 
-  name_vpc   = "vpc-for-alb-asg"
   cidr_vpc   = "192.168.0.0/16"
   cidr_world = "0.0.0.0/0"
 
@@ -34,15 +27,13 @@ module "aws-network" {
 
 
   name_sg_alb        = "SecGroupALB"
-  description_sg_alb = "Sec for ALB"
+  description_sg_alb = "Security for ALB"
 
   name_sg_asg        = "SecGroupWEB"
   description_sg_asg = "Security for Application"
 
-  protocol_sg = "tcp"
-
-  cidr_myip = ["${chomp(data.http.myip.body)}/32"]
-
+  name_sg_db        = "SecGroupDB"
+  description_sg_db = "Security for DataBase"
 
 }
 
@@ -58,7 +49,7 @@ module "aws-rds" {
 
   name                 = "mydb"
   username             = "admin"
-  password             = "mydbpassword"
+  password             = "dbpassword"
   parameter_group_name = "default.mysql5.7"
   skip_final_snapshot  = true
 
@@ -74,10 +65,8 @@ module "aws-asg" {
 
   name_template    = "template-for-asg"
   instance_type    = "t2.small"
-  key_name         = "aws-class-1"
   name_asg         = "asg-web-application"
   resource_type    = "instance"
-  device_index     = 0
   min_size         = 1
   max_size         = 3
   desired_capacity = 1
@@ -97,10 +86,9 @@ module "aws-asg" {
   health_check_type         = "EC2"
   health_check_grace_period = 300
 
-  termination_policies   = ["Default"]
+  #termination_policies   = ["Default"]
   instance_profile_name  = module.aws-SessionManager.instance_profile_name
   SecurityGroup_template = module.aws-network.SecurityGroup_template
-  subnet_public          = module.aws-network.subnet_public
   subnet_private         = module.aws-network.subnet_private
   alb_target_group_arn   = module.aws-alb.alb_target_group_arn
 

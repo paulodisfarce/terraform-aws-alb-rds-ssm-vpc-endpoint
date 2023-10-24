@@ -1,11 +1,10 @@
-
 // quantidade de EC2 min/max/desejada
 resource "aws_autoscaling_group" "main" {
   name                = "${var.name_asg}-${terraform.workspace}"
   min_size            = var.min_size
   max_size            = var.max_size
   desired_capacity    = var.desired_capacity
-  target_group_arns   = var.alb_target_group_arn
+  target_group_arns   = var.alb_target_group_arn 
   vpc_zone_identifier = var.subnet_private
   //Conexão entre ASG e o Template
   launch_template {
