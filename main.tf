@@ -98,6 +98,7 @@ module "aws-asg" {
   health_check_grace_period = 300
 
   termination_policies   = ["Default"]
+  instance_profile_name  = module.aws-SessionManager.instance_profile_name
   SecurityGroup_template = module.aws-network.SecurityGroup_template
   subnet_public          = module.aws-network.subnet_public
   subnet_private         = module.aws-network.subnet_private
@@ -154,3 +155,11 @@ module "aws-alb" {
   SecurityGroup_alb = [module.aws-network.SecurityGroup_alb]
 }
 
+module "aws-SessionManager" {
+  source = "./aws-SessionManager"
+
+  name = "EC2SSMRole_TF"
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+  name_profile = "Instance_SSM_Profile"
+
+}

@@ -1,3 +1,4 @@
+//Inbound and Outbound for Security Group
 locals {
   inbound_rules_alb = [
     { port = 80, description = "port HTTP", protocol = "tcp", cidr_blocks = ["0.0.0.0/0"] }
@@ -53,6 +54,9 @@ resource "aws_security_group" "sg-alb" {
       cidr_blocks = aws_subnet.private.*.cidr_block
     }
   }
+    tags = {
+    name = "${terraform.workspace}-SecGroupALB"
+  }
 }
 
 //SG for ASG/Template
@@ -79,8 +83,12 @@ resource "aws_security_group" "sg-asg" {
       cidr_blocks = egress.value.cidr_blocks
     }
   }
+    tags = {
+    name = "${terraform.workspace}-SecGroupASG"
+  }
 }
 
+//SG for DB
 resource "aws_security_group" "sg-db" {
   vpc_id      = aws_vpc.main.id
   name        = "SecGroupDB"
@@ -95,9 +103,8 @@ resource "aws_security_group" "sg-db" {
       cidr_blocks = aws_subnet.private.*.cidr_block
     }
   }
-
   tags = {
-    name = "SecGroupDB-${terraform.workspace}"
+    name = "${terraform.workspace}-SecGroupDB"
   }
 }
 

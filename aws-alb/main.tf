@@ -8,7 +8,7 @@ resource "aws_lb" "alb" {
   enable_deletion_protection = var.enable_deletion_protection
 
   tags = {
-    name = "${var.name_alb}-${terraform.workspace}"
+    name = "${terraform.workspace}-ALB"
   }
 }
 

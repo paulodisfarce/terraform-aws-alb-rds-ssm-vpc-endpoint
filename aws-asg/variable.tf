@@ -22,6 +22,7 @@ variable "key_name" {}
 variable "subnet_public" {}
 variable "device_index" {}
 variable "resource_type" {}
+variable "instance_profile_name" {}
 
 variable "ec2_user_data" {
   description = "Install WebServer"
