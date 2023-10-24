@@ -25,9 +25,9 @@ locals {
 
 
 #resource "aws_ec2_instance_connect_endpoint" "example" {
- # subnet_id          = flatten(aws_subnet.private.*.id)[0]
-  #security_group_ids = [aws_security_group.sg-asg.id]
- # preserve_client_ip = false
+# subnet_id          = flatten(aws_subnet.private.*.id)[0]
+#security_group_ids = [aws_security_group.sg-asg.id]
+# preserve_client_ip = false
 #}
 
 //SG for ALB
@@ -54,7 +54,7 @@ resource "aws_security_group" "sg-alb" {
       cidr_blocks = aws_subnet.private.*.cidr_block
     }
   }
-    tags = {
+  tags = {
     name = "${terraform.workspace}-SecGroupALB"
   }
 }
@@ -83,7 +83,7 @@ resource "aws_security_group" "sg-asg" {
       cidr_blocks = egress.value.cidr_blocks
     }
   }
-    tags = {
+  tags = {
     name = "${terraform.workspace}-SecGroupASG"
   }
 }

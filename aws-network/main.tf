@@ -20,9 +20,9 @@ resource "aws_subnet" "private" {
   cidr_block              = element(values(var.private_subnet), count.index)
   availability_zone       = element(keys(var.private_subnet), count.index)
   map_public_ip_on_launch = false
-      tags = {
-      Name = "${terraform.workspace}-Subnet-Private"
-    }
+  tags = {
+    Name = "${terraform.workspace}-Subnet-Private"
+  }
 }
 //Subnet Public for Web Server
 resource "aws_subnet" "public" {
@@ -31,9 +31,9 @@ resource "aws_subnet" "public" {
   cidr_block              = element(values(var.public_subnet), count.index)
   availability_zone       = element(keys(var.public_subnet), count.index)
   map_public_ip_on_launch = true
-      tags = {
-      Name = "${terraform.workspace}-Subnet-Public"
-    }
+  tags = {
+    Name = "${terraform.workspace}-Subnet-Public"
+  }
 }
 
 //Subnet Private for DB
@@ -44,9 +44,9 @@ resource "aws_subnet" "private_db_subnet" {
   availability_zone       = element(keys(var.private_db_subnet), count.index)
   map_public_ip_on_launch = false
 
-      tags = {
-      Name = "${terraform.workspace}-Subnet-Private-DB"
-    }
+  tags = {
+    Name = "${terraform.workspace}-Subnet-Private-DB"
+  }
 }
 
 //Subnet Group for DB
@@ -54,9 +54,9 @@ resource "aws_db_subnet_group" "private_db_group" {
   name       = "db subnet group private"
   subnet_ids = aws_subnet.private_db_subnet.*.id
 
-    tags = {
-      Name = "${terraform.workspace}-Subnet-Group-DB" # Name for the EC2 instances
-    }
+  tags = {
+    Name = "${terraform.workspace}-Subnet-Group-DB" # Name for the EC2 instances
+  }
 }
 
 //RT Public
@@ -69,8 +69,8 @@ resource "aws_route_table" "public_route_table" {
   }
 
   tags = {
-      Name = "${terraform.workspace}-Route-Public" 
-    }
+    Name = "${terraform.workspace}-Route-Public"
+  }
 }
 
 resource "aws_eip" "elastic_ip" {
@@ -81,9 +81,9 @@ resource "aws_nat_gateway" "nat_gateway" {
   allocation_id     = aws_eip.elastic_ip.id
   connectivity_type = "public"
   subnet_id         = aws_subnet.public[0].id
-    tags = {
-      Name = "${terraform.workspace}-Nat" 
-    }
+  tags = {
+    Name = "${terraform.workspace}-Nat"
+  }
 }
 
 //RT Private
@@ -95,9 +95,9 @@ resource "aws_route_table" "private_route_table" {
     nat_gateway_id = aws_nat_gateway.nat_gateway.id
   }
 
-    tags = {
-      Name = "${terraform.workspace}-Route-Private" # Name for the EC2 instances
-    }
+  tags = {
+    Name = "${terraform.workspace}-Route-Private" # Name for the EC2 instances
+  }
 }
 
 //RT Private for DB
@@ -108,9 +108,9 @@ resource "aws_route_table" "private_route_db_table" {
     create_before_destroy = true
   }
 
-    tags = {
-      Name = "${terraform.workspace}-Route-Private-DB" # Name for the EC2 instances
-    }
+  tags = {
+    Name = "${terraform.workspace}-Route-Private-DB" # Name for the EC2 instances
+  }
 }
 
 //Associate RT Public

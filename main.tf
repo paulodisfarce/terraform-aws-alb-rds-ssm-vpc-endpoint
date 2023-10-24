@@ -158,8 +158,8 @@ module "aws-alb" {
 module "aws-SessionManager" {
   source = "./aws-SessionManager"
 
-  name = "EC2SSMRole_TF"
-  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+  name         = "EC2SSMRole_TF"
+  policy_arn   = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
   name_profile = "Instance_SSM_Profile"
 
 }
