@@ -8,5 +8,5 @@ Utilizo ao todo 9 subnets de classe B, dividido em 3: ALB, ASG e RDS.
 
 No module network separei o security group pra ficar mais organizado, e usei locals para criar as regras de forma mais dinamica.
 
-Nessa infra utilizo um Session Manager, utilizo a role entre SSM e EC2 e faço atachamento na EC2, assim evitando usar a porta 22/SSH, ou ip publicos, Bastion, etc. Após passar uma 'limpa' pretendo também adicionar o VPC Endpoint. 
+Nessa infra usei o Session Manager.  Fiz o atachamento da role entre SSM e EC2, assim evitando usar a porta 22/SSH, ou ip publicos, Bastion, etc. Após passar uma 'limpa' pretendo também adicionar o VPC Endpoint. 
 Meu foco é criar um ppequeno artigo ensinando a conectar nas maquinas privadas usando SSM e VPC Endpoint, coisa simples mas bem feita.
